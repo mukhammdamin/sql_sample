@@ -1,4 +1,4 @@
-# sql_sample
+# My protfolio Project
 A collection of my sample SQL files and Projects
 
 # SQL Aggregate functions
