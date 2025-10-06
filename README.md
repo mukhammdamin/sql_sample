@@ -42,4 +42,50 @@ by exactly 2 more characters?
 ## HAVING avg_gpa < 3.3 > Criteria to filter the grouded rows by
 ## ORDER BY grade level; > Column to sort values
 
+## learn about how to create teachers tabele 
+
+## data cleaning transformation
+
+Looking at the customer_orders table below, we can see that there are
+
+In the exclusions column, there are missing/ blank spaces ' ' and null values.
+In the extras column, there are missing/ blank spaces ' ' and null values.
+
+CREATE TEMP TABLE customer_orders_temp AS
+SELECT 
+  order_id, 
+  customer_id, 
+  pizza_id, 
+  CASE
+	  WHEN exclusions IS null OR exclusions LIKE 'null' THEN ' '
+	  ELSE exclusions
+	  END AS exclusions,
+  CASE
+	  WHEN extras IS NULL or extras LIKE 'null' THEN ' '
+	  ELSE extras
+	  END AS extras,
+	order_time
+FROM pizza_runner.customer_orders;
+
+## here we can Learn how many pizzas were ordered
+SELECT COUNT(*)  AS pizza_order_count
+FROM customer_order_temp 
+
+## How many succesful oreder made from each deliveries 
+SELECT
+     RUNNER_ID 
+     COUNT(ORDERD_ID) AS succesful_orders
+
+## How many each type of pizzas delivered
+
+SELECT 
+  p.pizza_name, 
+  COUNT(c.pizza_id) AS delivered_pizza_count
+FROM #customer_orders AS c
+JOIN #runner_orders AS r
+  ON c.order_id = r.order_id
+JOIN pizza_names AS p
+  ON c.pizza_id = p.pizza_id
+WHERE r.distance != 0
+GROUP BY p.pizza_name;
 
